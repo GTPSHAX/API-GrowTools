@@ -28,7 +28,7 @@ API.get("*", (req, res) => {
 API.post("*", embed.any(), async (req, res) => {
     try {
         let reqData = req.body;  // Getting data from request
-        if (req.file) reqData = req.file;
+        if (req.files) reqData = req.files;
         const commandKey = req.url.split('/').pop(); // Getting command from URL
         const command = regisCmd.get(commandKey); // Getting command from Map
 
