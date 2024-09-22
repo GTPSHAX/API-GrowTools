@@ -2,7 +2,12 @@
 const fs = require("fs");
 const path = require("path");
 const express = require("express");
+const multer = require("multer");
 const { regisCmd } = require("./registered");  // Mengimpor Map regisCmd
+
+// Create local memo
+const memo = multer.memoryStorage();
+const embed = multer({ storage });
 
 // Load whole command
 const commandsPath = path.join(__dirname, "../process");
@@ -20,9 +25,10 @@ API.get("*", (req, res) => {
     return res.status(404).send();
 })
 
-API.post("*", async (req, res) => {
+API.post("*", embed.any(), async (req, res) => {
     try {
-        const reqData = req.body;  // Getting data from request
+        let reqData = req.body;  // Getting data from request
+        if (req.files) reqData = req.files;
         const commandKey = req.url.split('/').pop(); // Getting command from URL
         const command = regisCmd.get(commandKey); // Getting command from Map
 
