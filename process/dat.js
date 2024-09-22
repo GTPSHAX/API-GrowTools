@@ -10,7 +10,7 @@ addCommand("dat", async (data) => {
                 throw new Error(`Invalid ItemID!`);
             }
             
-            const result = items.items.find(i => i.item_id === id)
+            const result = items.items.find(i => i.item_id == id)
 
             return (result ? result : {"System": "Item not found!"});
         } else {
