@@ -1,9 +1,9 @@
 // Importing growtopia api
 const API = require("growtopia-api");
-const cmd = require("../router/registered");
-const { addCommand } = require("../router/registered");
 let items = require("../items.json");
 items = items.items;
+const cmd = require("../router/registered");
+const { addCommand } = require("../router/registered");
 
 // Regist cmd
 addCommand("search", async (data) => {
