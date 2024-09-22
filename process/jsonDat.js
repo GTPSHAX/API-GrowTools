@@ -2,6 +2,7 @@ const { addCommand } = require("../router/registered");
 
 addCommand("jsonDat", async (data) => {
     try {
+        return data;
         if (!data.buffer) {
             throw new Error("No buffer provided.");
         }
