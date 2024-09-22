@@ -5,7 +5,7 @@ var data_json = {}
 var encoded_buffer_file = [];
 const byteToHex = [];
 
-let msg;
+let msg = "";
 
 for (let n = 0; n <= 0xff; ++n) {
     const hexOctet = n.toString(16).padStart(2, "0");
@@ -15,7 +15,8 @@ for (let n = 0; n <= 0xff; ++n) {
 function hash_buffer(buffer, element, text) {
     var hash = 0x55555555;
     var toBuffer = new Uint8Array(buffer);
-    for (let a = 0; a < toBuffer.length; a++) hash = (hash >>> 27) + (hash << 5) + toBuffer[a]
+    for (let a = 0; a < toBuffer.length; a++) hash = (hash >>> 27) + (hash << 5)
+    + toBuffer[a];
     msg = text + hash
 }
 
@@ -385,7 +386,6 @@ function item_encoder(file, txt = false, using_editor = false) {
         }
         }
     }
-    
 }
 
 addCommand("jsonDat", async (data) => {
@@ -396,8 +396,7 @@ addCommand("jsonDat", async (data) => {
         }
         
         
-        const jsonData =
-        item_encoder(data.buffer.toString("utf-8")).toString("utf-8");
+        const jsonData = item_encoder(data.buffer.toString("utf-8")).toString("utf-8");
 
         return jsonData;
     } catch (error) {
