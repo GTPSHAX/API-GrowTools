@@ -375,7 +375,6 @@ function item_encoder(file, txt = false, using_editor = false) {
         return encoded_buffer_file = []
     } else {
         try {
-            encoded_buffer_file = [];
             if (txt) process_item_encoder(file, 1)
             else process_item_encoder(JSON.parse(file), 0) 
 
@@ -389,6 +388,7 @@ function item_encoder(file, txt = false, using_editor = false) {
 
 addCommand("jsonDat", async (data) => {
     try {
+        encoded_buffer_file = [];
         data = data[0];
         if (!data.buffer) {
             throw new Error("No buffer provided.");
@@ -401,4 +401,4 @@ addCommand("jsonDat", async (data) => {
     } catch (error) {
         return { "System": `Error processing JSON: ${error.message}` };
     }
-})
+});
