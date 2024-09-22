@@ -1,7 +1,6 @@
 // Importing growtopia api
 const API = require("growtopia-api");
-let items = require("../items.json");
-items = items.items;
+const items = require("../items.json");
 const cmd = require("../router/registered");
 const { addCommand } = require("../router/registered");
 
@@ -17,7 +16,7 @@ addCommand("search", async (data) => {
 
             const results = await API.searchItem(name).then(data => {
                 data.forEach(a => {
-                    const foundItem = items.find(i => i.name.toLowerCase() ==
+                    const foundItem = items.items.find(i => i.name.toLowerCase() ==
                     a.itemName.toLowerCase());
                     if (foundItem) {
                         a.id = foundItem.id;
