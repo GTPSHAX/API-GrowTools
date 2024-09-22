@@ -12,6 +12,98 @@ for (let n = 0; n <= 0xff; ++n) {
     byteToHex.push(hexOctet);
 }
 
+/**
+ * @param {ArrayBuffer} arrayBuffer
+ * @return {string}
+ */
+function hex(arrayBuffer, is_without_space) {
+    const buff = new Uint8Array(arrayBuffer);
+    const hexOctets = [];
+    for (let i = 0; i < buff.length; ++i) hexOctets.push(byteToHex[buff[i]]);
+
+    return hexOctets.join(is_without_space ? "" : " ");
+}
+
+/**
+ * @param {ArrayBuffer} buffer
+ * @param {number} pos
+ * @param {number} len
+ * @return {string}
+ */
+function read_buffer_number(buffer, pos, len) {
+    let value = 0;
+    for (let a = 0; a < len; a++) value += buffer[pos + a] << (a * 8)
+
+    return value;
+}
+
+/**
+ * @param {number} pos
+ * @param {number} len
+ * @param {number} value
+ */
+function write_buffer_number(pos, len, value) {
+    for (let a = 0; a < len; a++) {
+        encoded_buffer_file[pos + a] = (value >> (a * 8)) & 255;
+    }
+}
+
+function write_buffer_string(pos, len, value, using_key, item_id) {
+    for (let a = 0; a < len; a++) {
+        if (using_key) encoded_buffer_file[pos + a] = value.charCodeAt(a) ^ (items_secret_key.charCodeAt((a + item_id) % items_secret_key.length))
+        else encoded_buffer_file[pos + a] = value.charCodeAt(a)
+    }
+}
+
+function hash_buffer(buffer, element, text) {
+    var hash = 0x55555555;
+    var toBuffer = new Uint8Array(buffer);
+    for (let a = 0; a < toBuffer.length; a++) hash = (hash >>> 27) + (hash << 5) + toBuffer[a]
+    document.getElementById(element).innerHTML = text + hash
+}
+
+/**
+ * Convert a hex string to an ArrayBuffer.
+ * 
+ * @param {string} hexString - hex representation of bytes
+ * @return {ArrayBuffer} - The bytes in an ArrayBuffer.
+ */
+function hexStringToArrayBuffer(pos, hexString) { //https://gist.github.com/don/871170d88cf6b9007f7663fdbc23fe09
+    // remove the space
+    hexString = hexString.replace(/ /g, '');
+    if (hexString.length % 2 != 0) console.log('WARNING: expecting an even number of characters in the hexString');
+    
+    // check for some non-hex characters
+    var bad = hexString.match(/[G-Z\s]/i);
+    if (bad) console.log('WARNING: found non-hex characters', bad);    
+
+    // convert the octets to integers
+    var integers = hexString.match(/[\dA-F]{2}/gi).map(function(s) {
+        encoded_buffer_file[pos++] = parseInt(s, 16)
+    });
+
+    return integers
+}
+
+/**
+ * @param {ArrayBuffer} buffer
+ * @param {number} pos
+ * @param {number} len
+ * @param {boolean} using_key
+ * @param {number} item_id
+ */
+function read_buffer_string(buffer, pos, len, using_key, item_id) {
+    var result = "";
+    if (using_key) for (let a = 0; a < len; a++) result += String.fromCharCode(buffer[a + pos] ^ items_secret_key.charCodeAt((item_id + a) % items_secret_key.length))
+    else for (let a = 0; a < len; a++) result += String.fromCharCode(buffer[a + pos])
+    
+    return result;
+}
+
+function check_last_char(dest, src) {
+    return dest[dest.length - 1] == src
+}
+
 function hash_buffer(buffer, element, text) {
     var hash = 0x55555555;
     var toBuffer = new Uint8Array(buffer);
