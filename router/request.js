@@ -7,7 +7,7 @@ const { regisCmd } = require("./registered");  // Mengimpor Map regisCmd
 
 // Create local memo
 const memo = multer.memoryStorage();
-const embed = multer({ storage });
+const embed = multer({ memo });
 
 // Load whole command
 const commandsPath = path.join(__dirname, "../process");
