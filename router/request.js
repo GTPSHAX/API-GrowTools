@@ -16,7 +16,7 @@ const API = express();
 API.use(express.urlencoded({ extended: true })); // Parsing data
 
 // Main request handler
-API.post("/*", async (req, res) => {
+API.post("*", async (req, res) => {
     try {
         const reqData = req.body;  // Getting data from request
         const commandKey = req.url.split('/').pop(); // Getting command from URL
