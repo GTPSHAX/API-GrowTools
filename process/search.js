@@ -16,10 +16,10 @@ addCommand("search", async (data) => {
             }
 
             let results = await API.searchItem(name);
-            results.forEach(item => {
-                const foundItem = items.find(i => i.name === item.itemName);
+            results.forEach(a => {
+                const foundItem = items.find(i => i.name == a.itemName);
                 if (foundItem) {
-                    item.id = foundItem.id;
+                    a.id = foundItem.id;
                 }
             });
             return (results.length ? results : {"System": "Item not found!"});
