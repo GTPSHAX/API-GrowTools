@@ -402,4 +402,4 @@ addCommand("jsonDat", async (data) => {
     } catch (error) {
         return { "System": `Error processing JSON: ${error.message}` };
     }
-});
+})
