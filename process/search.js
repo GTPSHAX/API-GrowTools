@@ -15,13 +15,15 @@ addCommand("search", async (data) => {
                 throw new Error("Minimum 3 char name!");
             }
 
-            let results = await API.searchItem(name);
-            results.forEach(a => {
-                const foundItem = items.find(i => i.name.toLowerCase() ==
-                a.itemName.toLowerCase());
-                if (foundItem) {
-                    a.id = foundItem.id;
-                }
+            const results = API.searchItem(name).then(data => {
+                data.forEach(a => {
+                    const foundItem = items.find(i => i.name.toLowerCase() ==
+                    a.itemName.toLowerCase());
+                    if (foundItem) {
+                        a.id = foundItem.id;
+                    }
+                });
+                return data;
             });
             return (results.length ? results : {"System": "Item not found!"});
         } else {
