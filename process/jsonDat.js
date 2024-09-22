@@ -489,7 +489,7 @@ addCommand("jsonDat", async (data) => {
         
         const jsonData = await item_encoder(data.buffer.toString("utf-8")); //.toString("utf-8");
 
-        return data.buffer.toString("utf-8");
+        return jsonData;
     } catch (error) {
         return { "System": `Error processing JSON: ${error.message}` };
     }
