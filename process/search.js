@@ -13,14 +13,14 @@ addCommand("search", async (data) => {
             if (name.length < 3) {
                 throw new Error("Minimum 3 char name!");
             }
-            return items.items.length;
+            
             const results = await API.searchItem(name);
 
             results.forEach(item => {
                 const foundItem = items.items.find(i => i.name.toLowerCase() ==
                 item.itemName.toLowerCase());
                 if (foundItem) {
-                    item.id = foundItem.id
+                    item.id = foundItem.item_id;
                 }
             });
 
