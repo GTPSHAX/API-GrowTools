@@ -16,6 +16,10 @@ const API = express();
 API.use(express.urlencoded({ extended: true })); // Parsing data
 
 // Main request handler
+API.get("*" (req, res) => {
+    return req.setStatus(404);
+})
+
 API.post("*", async (req, res) => {
     try {
         const reqData = req.body;  // Getting data from request
