@@ -17,7 +17,8 @@ addCommand("search", async (data) => {
 
             let results = await API.searchItem(name);
             results.forEach(a => {
-                const foundItem = items.find(i => i.name == a.itemName);
+                const foundItem = items.find(i => i.name.toLowerCase() ==
+                a.itemName.toLowerCase());
                 if (foundItem) {
                     a.id = foundItem.id;
                 }
