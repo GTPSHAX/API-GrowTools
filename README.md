@@ -38,6 +38,7 @@ Objects within each response Array:
 | Key         | Type     | Description                    |
 | :---------- | :------- | :------------------------------|
 | itemName    | String   | Item Name                      |
+| id          | Integer  | ItemID                         |
 | url         | String   | Growtopia wiki URL             |
 | System      | Object   | System API message             |
 ## Acknowledgements
