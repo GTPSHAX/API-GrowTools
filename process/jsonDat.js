@@ -384,7 +384,6 @@ function item_encoder(file, txt = false, using_editor = false) {
         } catch (error) {
             console.error('Error parsing JSON:', error);
         }
-        }
     }
 }
 
