@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-const cmd = new Map([]);
-
-module.exports = cmd;
-=======
 let regisCmd = new Map();
 
 // Regis cmd function
@@ -14,4 +9,3 @@ module.exports = {
     regisCmd,
     addCommand
 };
->>>>>>> 82cc4c9 (Change request system)

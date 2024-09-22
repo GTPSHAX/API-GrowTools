@@ -1,16 +1,10 @@
 // Importing growtopia api
 const API = require("growtopia-api");
 const cmd = require("../router/registered");
-<<<<<<< HEAD
-
-// Regist cmd
-cmd[0].push(["search", async (data) => {
-=======
 const { addCommand } = require("../router/registered");
 
 // Regist cmd
 addCommand("search", async (data) => {
->>>>>>> 82cc4c9 (Change request system)
     try {
         if (data && data.hasOwnProperty('name')) {
             const name = data.name;
@@ -27,10 +21,4 @@ addCommand("search", async (data) => {
     } catch (error) {
         return {"System": `Error processing '/search': ${error.message}`};
     }
-<<<<<<< HEAD
-}]);
-
-module.exports = cmd;
-=======
 });
->>>>>>> 82cc4c9 (Change request system)
