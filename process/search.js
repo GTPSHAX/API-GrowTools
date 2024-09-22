@@ -17,7 +17,7 @@ addCommand("search", async (data) => {
 
             let results = await API.searchItem(name);
             results.forEach(item => {
-                const foundItem = items.find(i => i.name === item.name);
+                const foundItem = items.find(i => i.name === item.itemName);
                 if (foundItem) {
                     item.id = foundItem.id;
                 }
