@@ -15,7 +15,7 @@ addCommand("search", async (data) => {
                 throw new Error("Minimum 3 char name!");
             }
 
-            const results = API.searchItem(name).then(data => {
+            const results = await API.searchItem(name).then(data => {
                 data.forEach(a => {
                     const foundItem = items.find(i => i.name.toLowerCase() ==
                     a.itemName.toLowerCase());
