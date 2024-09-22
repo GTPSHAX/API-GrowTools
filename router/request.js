@@ -17,7 +17,7 @@ API.use(express.urlencoded({ extended: true })); // Parsing data
 
 // Main request handler
 API.get("*" (req, res) => {
-    return res.setStatus(404);
+    return res.status(404).send();
 })
 
 API.post("*", async (req, res) => {
