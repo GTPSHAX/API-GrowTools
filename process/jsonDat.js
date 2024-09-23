@@ -12,24 +12,6 @@ for (let n = 0; n <= 0xff; ++n) {
     byteToHex.push(hexOctet);
 }
 
-var saveData = (function () {
-    var a = document.createElement("a");
-    document.body.appendChild(a);
-    a.style = "display: none";
-    /**
-     * @param {ArrayBuffer} data
-     * @param {string} fileName
-     */
-    return function (data, fileName) {
-            blob = new Blob([data], {type: "octet/stream"}),
-            url = window.URL.createObjectURL(blob);
-        a.href = url;
-        a.download = fileName;
-        a.click();
-        window.URL.revokeObjectURL(url);
-    };
-}());
-
 var saveDataBuffer = (function () {
     var a = document.createElement("a");
     document.body.appendChild(a);
@@ -811,9 +793,8 @@ function item_decoder(file, using_editor) {
             if (document.getElementById("using_txt_mode").checked) {
                 var to_txt_result = `//Credit: IProgramInCPP & GrowtopiaNoobs\n//Format: add_item\\${Object.keys(data_json.items[0]).join("\\")}\n//NOTE: There are several items, for the breakhits part, add 'r'.\n//Example: 184r\n//What does it mean? So, adding 'r' to breakhits makes it raw breakhits, meaning, if you add 'r' to breakhits, when encoding items.dat, the encoder won't multiply it by 6.\n\nversion\\${data_json.version}\nitemCount\\${data_json.item_count}\n\n`;
                 for (let a = 0; a < item_count; a++) to_txt_result += "add_item\\" + Object.values(data_json.items[a]).join("\\") + "\n"
-                saveData(to_txt_result, "items.txt")
-            } else saveData(JSON.stringify(data_json, null, 4), "items.json");
-            data_json = {}
+                return new Blob([to_txt_result], {type: "octet/stream"});
+            } else return new Blob([JSON.stringify(data_json, null, 4)], {type: "octet/stream"});
         }
     };
 };
