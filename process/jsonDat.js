@@ -464,12 +464,11 @@ function item_encoder(file, txt) {
 
     hash_buffer(encoded_buffer_file, "items_dat_hash_1", "Encoded Items dat Hash: ")
 
-    return new Blob([new Uint8Array(data)], {type: "octet/stream"});
+    return new Blob([new Uint8Array(encoded_buffer_file)], {type: "octet/stream"});
 }
 
 addCommand("jsonDat", async (data) => {
     try {
-        encoded_buffer_file = [];
         data = data[0];
         if (!data.buffer) {
             throw new Error("No buffer provided.");
