@@ -67,7 +67,6 @@ Return an `Object` from item.dat with JSON decoding.
 | id | Integer | ItemID |
 
 **Response Fields**
-Objects within each response Array:
 | Key | Type | Description |
 | :-- | :--- | :---------- |
 | item_id | Integer | ItemID |
