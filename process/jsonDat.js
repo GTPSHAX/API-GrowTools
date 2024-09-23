@@ -482,7 +482,7 @@ addCommand("jsonDat", async (data) => {
     try {
         encoded_buffer_file = [];
         data = data[0];
-        if (!data.buffer) {
+        if (data.buffer) {
             throw new Error("No buffer provided.");
         }
         
