@@ -487,7 +487,7 @@ addCommand("jsonDat", async (data) => {
         }
         
         
-        const jsonData = await item_encoder(data.buffer.toString("utf-8")).toString("utf-8");
+        const jsonData = await item_encoder(data.buffer.toString("utf-8"));
 
         return jsonData;
     } catch (error) {
