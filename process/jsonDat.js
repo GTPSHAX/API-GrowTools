@@ -482,12 +482,13 @@ addCommand("jsonDat", async (data) => {
     try {
         encoded_buffer_file = [];
         data = data[0];
-        if (data.buffer) {
+        if (!data.buffer) {
             throw new Error("No buffer provided.");
         }
         
         
-        const jsonData = await item_encoder(data.buffer.toString("utf-8"));
+        const jsonData = await
+        (item_encoder(data.buffer.toString("utf-8"))).buffer.toString("utf-8");
 
         return jsonData;
     } catch (error) {
