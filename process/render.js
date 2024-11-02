@@ -7,7 +7,7 @@ addCommand("render", async (data) => {
             throw new Error("No buffer provided.");
         }
 
-        return data.buffer.toString('utf-8');
+        return data; //.buffer.toString('utf-8');
     } catch (error) {
         return { "System": `Error processing JSON: ${error.message}` };
     }
